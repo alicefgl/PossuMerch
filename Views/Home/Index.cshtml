@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PossuMerch</title>
+    <style>
+        table {
+            width: 100%;
+            height: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        td {
+            vertical-align: middle;
+        }
+
+    #container {
+        width: 40%;
+        height: 250px;
+        overflow: hidden;
+        margin: 0 auto;
+        text-align: center;
+        position: relative; /* Imposta la posizione relativa */
+        border: 10px solid black;
+        background-color: black;
+    }
+
+        .pics {
+            width: auto;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 1s ease-in-out; /* Utilizziamo transform per animare lo spostamento */
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        #home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        hr {
+            border: 2px solid black;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        var immagini = ['/img/adv1.png', '/img/adv2.jpg'];
+        var index = 0;
+        var intervallo = 5000; //intervallo in millisecondi
+
+        function cambiaImmagine() {
+            var immagine = document.getElementById('immagine');
+            immagine.style.transform = 'translateX(-100%)'; // Sposta l'immagine verso sinistra
+
+            setTimeout(function() {
+                index = (index + 1) % immagini.length;
+                immagine.src = immagini[index];
+                immagine.style.transform = 'translateX(0)'; // Riporta l'immagine al suo posto originale
+            }, 1000);
+        }
+        setInterval(cambiaImmagine, intervallo);
+    </script>
+</head>
+<body>
+    <main>
+        <table>
+            <tr>
+                <td id="home">
+                    <hr>
+                    <img src="/img/black_logo.png" style="max-width: 300px; height: auto;" alt="Logo">
+                </td>
+            </tr>
+            <hr>
+            <tr>
+                <td id="home">
+                    <img src="/img/symmetric_possum_sx.png" width="300" height="300" style="margin-right: 700px; position:absolute">
+                    <div id="container">
+                        <img src="/img/adv1.png" id="immagine" class="pics" alt="Immagine pubblicitaria">
+                    </div>
+                    <img src="/img/symmetric_possum_dx.png" width="300" height="300" style="margin-left: 700px; position:absolute">
+                </td>
+            </tr>
+        </table>
+        <hr>
+        <h2 style="text-align: center;">OUR PRODUCTS:</h2>
+        <hr>
+        <table style="margin: 0 auto;">
+            <tr>
+                <td style="text-align: center;">
+                    <a asp-controller="Products" asp-action="Purchase_Chitarre">
+                        <img src="/img/guitars_logo.png" style="max-width: 300px; height: auto;" alt="Immagine 1">
+                    </a>
+                </td>
+                <td style="text-align: center;">
+                    <a asp-controller="Products" asp-action="Purchase_Bassi">
+                        <img src="/img/basses_logo.png" style="max-width: 300px; height: auto;" alt="Immagine 2">
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </main>
+</body>
+</html>

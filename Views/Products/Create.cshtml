@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PossuMerch</title>
+    <style>
+        table {
+            width: 100%;
+            height: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        td {
+            vertical-align: middle; /* Centra il contenuto verticalmente */
+        }
+
+        #container {
+            width: 90%; /* Modifica la larghezza del container */
+            height: 250px; /* Modifica l'altezza del container */
+            overflow: hidden;
+            margin: 0 auto; /* Centra il container orizzontalmente */
+            text-align: center; /* Centra il contenuto all'interno del container */
+        }
+
+        .pics {
+            width: auto;
+            height: 100%;
+            transition: opacity 1s ease-in-out, left 1s ease-in-out;
+            left: 0;
+            margin: 0 auto; /* Centra l'immagine all'interno del container */
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        #home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+    </style>
+    <script>
+        var immagini = ['/img/adv1.png', '/img/adv2.jpg'];
+        var index = 0;
+        var intervallo = 3000;
+
+        function cambiaImmagine() {
+            var immagine = document.getElementById('immagine');
+
+            immagine.style.opacity = '0';
+            immagine.style.left = '-100%';
+
+            setTimeout(function() {
+                index = (index + 1) % immagini.length;
+                immagine.src = immagini[index];
+                immagine.style.opacity = '1';
+                immagine.style.left = '0';
+            }, 1000);
+        }
+        setInterval(cambiaImmagine, intervallo);
+    </script>
+</head>
+<body>
+    <main>
+        <table>
+            <tr>
+                <td id="home">
+                    <img src="/img/black_logo.png" style="max-width: 300px; height: auto;" alt="Logo">
+                </td>
+            </tr>
+            <tr>
+                <td id="home">
+                    <div id="container">
+                        <img src="/img/adv1.png" id="immagine" class="pics" alt="Immagine pubblicitaria">
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td>
+                    <a asp-controller="Prodotto" asp-action="Purchase_Chitarre">
+                        <img src="/img/logo_chitarre.png" style="max-width: 300px; height: auto;" alt="Immagine 1">
+                    </a>
+                </td>
+                <td>
+                    <a asp-controller="Prodotto" asp-action="Purchase_Bassi">
+                        <img src="/img/logo_bassi.png" style="max-width: 300px; height: auto;" alt="Immagine 2">
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </main>
+</body>
+</html>

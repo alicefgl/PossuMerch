@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        table {
+            width: 100%;
+            height: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        td {
+            vertical-align: middle;
+        }
+
+    #container {
+        width: 40%;
+        height: 250px;
+        overflow: hidden;
+        margin: 0 auto;
+        text-align: center;
+        position: relative; /* Imposta la posizione relativa */
+        border: 10px solid black;
+        background-color: black;
+    }
+
+        .pics {
+            width: auto;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 1s ease-in-out; /* Utilizziamo transform per animare lo spostamento */
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        #home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        hr {
+            border: 2px solid black;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<script>
+        var immagini = ['/img/ChiSiamo/samu.jpeg', '/img/ChiSiamo/alice_el.jpeg', '/img/ChiSiamo/samu_el.jpeg', '/img/ChiSiamo/alice_ba.jpeg'];
+        var index = 0;
+        var intervallo = 3000;
+
+        function cambiaImmagine() {
+            var immagine = document.getElementById('immagine');
+            immagine.style.transform = 'translateX(-100%)'; // Sposta l'immagine verso sinistra
+
+            setTimeout(function() {
+                index = (index + 1) % immagini.length;
+                immagine.src = immagini[index];
+                immagine.style.transform = 'translateX(0)'; // Riporta l'immagine al suo posto originale
+            }, 1000);
+        }
+        setInterval(cambiaImmagine, intervallo);
+</script>
+<body>
+    <main>
+        <table>
+            <tr>
+                <td>
+                    <img src="/img/chi_siamo.png" style="display: block; margin: 0 auto; max-width: 300px; height: auto;" alt="Logo">
+                </td>
+            </tr>
+            <tr>
+            <hr>
+                <td id="home">
+                    <img src="/img/symmetric_possum_sx.png" width="300" height="300" style="margin-right: 700px; position:absolute">
+                    <div id="container">
+                        <img src="/img/ChiSiamo/samu.jpeg" id="immagine" class="pics" alt="Immagine pubblicitaria">
+                    </div>
+                    <img src="/img/symmetric_possum_dx.png" width="300" height="300" style="margin-left: 700px; position:absolute">
+                </td>
+            </tr>
+        </table>
+        <p>
+            <hr>
+            <div class="w-75 mx-auto card p-3 transparent-form" style="text-align: center;">
+                Welcome to PossuMerch – your ultimate destination for premium guitars and basses from renowned brands, where innovation meets tradition and passion for music thrives. Founded by Samuele Canini and Alice Foglietta, our mission is to provide musicians with unparalleled access to top-quality instruments while delivering exceptional customer service.
+
+                At PossuMerch, we pride ourselves on our commitment to innovation. Our team is constantly sourcing and adding new products to our collection, ensuring that you have access to the latest and most cutting-edge instruments on the market. Whether you're searching for the iconic sounds of Fender, the versatility of Gibson, or the craftsmanship of Martin, we have something to suit every musician's taste.
+
+                But it's not just about the products – it's about the experience. Our dedicated team is here to provide you with personalized assistance every step of the way. From helping you find the perfect guitar or bass to offering expert advice and support, we go above and beyond to ensure your satisfaction.
+
+                At the heart of PossuMerch lies our passion for music. It's what drives us to continuously improve and innovate, and it's what fuels our dedication to providing musicians with the instruments and service they deserve.
+
+                Discover the PossuMerch difference today and join our community of passionate musicians who trust us to provide them with the instruments and service they deserve.
+            </div>
+        </p>
+    </main>
+</body>
+</html>

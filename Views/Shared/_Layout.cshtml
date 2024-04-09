@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PossuMerch</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PossuMerch.styles.css" asp-append-version="true" />
+</head>
+
+<body style="margin-top: 150px;">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item" style="height: 100%; width: 100%; margin-left: 20px; display: flex; align-items: center;">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                                <img src="/img/white_logo.png" alt="Logo" style="width: 150px; height: auto;">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Instruments</a>
+                            <div class="dropdown-menu">
+                                <a class="nav-link active" asp-area="" asp-controller="Products" asp-action="Purchase_Chitarre">Guitars</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="nav-link active" asp-area="" asp-controller="Products" asp-action="Purchase_Bassi">Basses</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="ChiSiamo">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">@ViewData["Nome"]</a>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial"></partial>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div style="display: inline-block; position: fixed; bottom: 0; right: 0; width: 100px; height: 100px; margin: 20px;">
+        <a class="nav-link text-dark" asp-controller="Products" asp-action="Index">
+            <img src="/img/carrello.png" id="carrello" alt="Carrello" style="width: 100px; height: 100px; cursor: pointer;">
+        </a>
+        <div id="cartInfo" style="position: absolute; top: 10px; right: 10px; background-color: #ffffff; padding: 5px; border-radius: 50%;">
+            <span id="elemC"></span>
+        </div>
+    </div>
+}
+
+<footer class="bg-primary text-white py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Privacy</h3>
+                <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Privacy"><u>Privacy Policy</u></a>
+                <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="LegalNotices"><u>Legal Notices</u></a>
+                <p>Crediti tema: <a href="https://bootswatch.com/lux/" class="text-white" target="_blank">BootsWatch Lux</a></p>
+                <p>Support email: staff@possumerch.com</p>
+                <p>&copy; 2024 PossuMerch. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

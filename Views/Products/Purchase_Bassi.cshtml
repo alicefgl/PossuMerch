@@ -1,0 +1,196 @@
+
+@model List<PossuMerch.Data.Prodotto>
+
+@{
+    ViewData["Title"] = "Basses";
+}
+
+<style>
+    /* Stile per centrare verticalmente il testo di _NomeP */
+    .product-name {
+        vertical-align: middle;
+    }
+
+    /* Stile per posizionare il Prezzo sotto il nome */
+    .product-price {
+        font-size: smaller; /* Riduci leggermente la dimensione del testo del Prezzo */
+    }
+
+    /* Stile per allineare il pulsante e l'input della quantità */
+    .add-to-cart {
+        text-align: center; /* Centra orizzontalmente */
+        padding-top: 10px; /* Aggiungi spazio sopra */
+    }
+
+    /* Stile per le linee separatorie */
+    .separator {
+        border-bottom: 1px solid black; /* Aggiungi una linea inferiore */
+    }
+
+    .overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(255, 255, 255, 0.7); /* Bianco con un'opacità del 70% */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      height: 0;
+      overflow: hidden;
+      transition: height 0.5s ease-in-out;
+    }
+    .overlay-text {
+      font-size: 18px;
+      text-align: center;
+    }
+    .image-container {
+      position: relative;
+      width: 600px;
+      overflow: hidden;
+      margin-left: -100px; /* Sposta l'immagine di 50px a sinistra. Modifica questo valore secondo le tue preferenze */
+    }
+    .image-container:hover .overlay {
+      height: 100%;
+    }
+</style>
+
+<script>
+    function checkCart() {
+        var isAuthenticated = @User.Identity.IsAuthenticated.ToString().ToLower(); // Verifica se l'utente è autenticato
+
+        if (!isAuthenticated) {
+            alert("Devi effettuare l'accesso per aggiungere prodotti al carrello.");
+            return false; // Blocca il submit del form se l'utente non è autenticato
+        }
+
+        var allZero = true;
+        var validQuantity = true; // Aggiunto controllo per la validità della quantità
+        var quantities = document.querySelectorAll('[name="Quantita"]');
+        quantities.forEach(function(quantity) {
+            var value = parseInt(quantity.value);
+            if (value < 0) {
+                validQuantity = false; // Se la quantità è negativa, impostiamo validQuantity a false
+            }
+            if (value > 0) {
+                allZero = false;
+            }
+        });
+        if (validQuantity === false) {
+            alert("La quantità non può essere negativa.");
+            return false; // Blocca il submit del form se la quantità è negativa
+        }
+        if (allZero) {
+            alert("Non ci sono prodotti nel carrello!");
+            return false; // Blocca il submit del form
+        }
+        return true; // Consente il submit del form se l'utente è autenticato, ci sono prodotti nel carrello e la quantità è valida
+    }
+    
+    function removeFromCart(button) {
+        var form = button.closest('form'); // Trova il form genitore
+        var inputQuantita = form.querySelector('[name="Quantita"]'); // Trova l'input della quantità
+        inputQuantita.value = 0; // Imposta la quantità a 0
+        form.submit(); // Invia il form
+    }
+    
+    </script>
+
+@{
+    int counter = 0;
+    int counterimg = 1;
+}
+
+<div class="text-center">
+    <img src="/img/basses_logo.png" style="max-width: 300px; height: auto;" alt="Logo">
+    <table class="table">
+        <tbody>
+            @foreach (PossuMerch.Data.Prodotto item in Model) {
+                if (counter >= 5) {
+                        <tr class="separator">
+                            <tr class="separator"></tr>
+                        @if (counter % 2 == 0) { <!-- Se il contatore è pari -->
+                            <td class="product-name"> <!-- Aggiungi la classe product-name qui -->
+                                <b>@Html.DisplayFor(modelItem => item._NomeP)</b>
+                                <div class="product-price">@Html.DisplayFor(modelItem => item.Prezzo)€</div> <!-- Aggiungi il Prezzo sotto il nome -->
+                                <div class="add-to-cart">
+                                    <form asp-action="Cart" method="post" onsubmit="return checkCart()">
+                                        <div style="display: flex; align-items: center;">
+                                            <input asp-for="@item.Quantita" name="Quantita" class="form-control">
+                                            <button type="submit" class="btn btn-primary">Add to Cart</button> <!-- Pulsante aggiungi al carrello -->
+                                            <button type="button" class="btn btn-danger" onclick="removeFromCart(this)">Remove All</button> <!-- Pulsante rimuovi dal carrello -->
+                                        </div>
+                                        <input type="hidden" name="_NomeP" value="@item._NomeP" />
+                                        <input type="hidden" name="Prezzo" value="@item.Prezzo" />
+                                        <input type="hidden" name="TipoP" value="@item.TipoP" />
+                                    </form>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="container mt-5">
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-3">
+                                            <div class="image-container">
+                                                <img src="/img/basses/img@(counterimg).png" alt="Immagine @(counterimg)" />
+                                                <div class="overlay">
+                                                    <div class="overlay-text">
+                                                        <p>@item.Descrizione</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        }
+                        else { <!-- Se il contatore è dispari -->
+                            <td>
+                                <div class="container mt-5">
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-3">
+                                            <div class="image-container">
+                                                <img src="/img/basses/img@(counterimg).png" alt="Immagine @(counterimg)" />
+                                                <div class="overlay">
+                                                    <div class="overlay-text">
+                                                        <p>@item.Descrizione</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="product-name"> <!-- Aggiungi la classe product-name qui -->
+                                <b>@Html.DisplayFor(modelItem => item._NomeP)</b>
+                                <div class="product-price">@Html.DisplayFor(modelItem => item.Prezzo)€</div> <!-- Aggiungi il Prezzo sotto il nome -->
+                                <div class="add-to-cart"> <!-- Aggiungi il wrapper per il pulsante e l'input -->
+                                    <form asp-action="Cart" method="post" onsubmit="return checkCart()">
+                                        <div style="display: flex; align-items: center;">
+                                            <input asp-for="@item.Quantita" name="Quantita" class="form-control">
+                                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                            <button type="button" class="btn btn-danger" onclick="removeFromCart(this)">Remove All</button>                                        
+                                        </div>
+
+                                        <input type="hidden" name="_NomeP" value="@item._NomeP" />
+                                        <input type="hidden" name="Prezzo" value="@item.Prezzo" />
+                                        <input type="hidden" name="TipoP" value="@item.TipoP" />
+
+                                    </form>
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                    <tr class="separator"></tr>
+                    counterimg++;
+                }
+                counter++;
+            }
+        </tbody>
+    </table>
+
+</div>
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+

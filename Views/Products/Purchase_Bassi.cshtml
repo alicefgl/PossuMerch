@@ -1,5 +1,10 @@
 
 @model List<PossuMerch.Data.Prodotto>
+@using Microsoft.AspNetCore.Identity
+@using PossuMerch.Data
+
+@inject SignInManager<Utente> SignInManager
+@inject UserManager<Utente> UserManager
 
 @{
     ViewData["Title"] = "Basses";
@@ -61,7 +66,7 @@
         var isAuthenticated = @User.Identity.IsAuthenticated.ToString().ToLower(); // Verifica se l'utente è autenticato
 
         if (!isAuthenticated) {
-            alert("Devi effettuare l'accesso per aggiungere prodotti al carrello.");
+            alert("You have to log in before adding items to the cart!");
             return false; // Blocca il submit del form se l'utente non è autenticato
         }
 
@@ -78,11 +83,11 @@
             }
         });
         if (validQuantity === false) {
-            alert("La quantità non può essere negativa.");
+            alert("Quantity cannot be negative");
             return false; // Blocca il submit del form se la quantità è negativa
         }
         if (allZero) {
-            alert("Non ci sono prodotti nel carrello!");
+            alert("There isn't any item in the cart!");
             return false; // Blocca il submit del form
         }
         return true; // Consente il submit del form se l'utente è autenticato, ci sono prodotti nel carrello e la quantità è valida
@@ -124,6 +129,7 @@
                                         <input type="hidden" name="_NomeP" value="@item._NomeP" />
                                         <input type="hidden" name="Prezzo" value="@item.Prezzo" />
                                         <input type="hidden" name="TipoP" value="@item.TipoP" />
+                                        <input type="hidden" name="UserName" value="@UserManager.GetUserName(User)" />
                                     </form>
                                 </div>
                             </td>
@@ -171,11 +177,10 @@
                                             <button type="submit" class="btn btn-primary">Add to Cart</button>
                                             <button type="button" class="btn btn-danger" onclick="removeFromCart(this)">Remove All</button>                                        
                                         </div>
-
                                         <input type="hidden" name="_NomeP" value="@item._NomeP" />
                                         <input type="hidden" name="Prezzo" value="@item.Prezzo" />
                                         <input type="hidden" name="TipoP" value="@item.TipoP" />
-
+                                        <input type="hidden" name="UserName" value="@UserManager.GetUserName(User)" />
                                     </form>
                                 </div>
                             </td>

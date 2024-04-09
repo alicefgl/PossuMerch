@@ -16,5 +16,7 @@ public class dbContext  : IdentityDbContext<Utente>
     public DbSet<Utente> Utenti { get; set; }
     public DbSet<Prodotto> Prodotti { get; set; }
     public DbSet<PossuMerch.Data.Cart> Cart { get; set; } = default!;
+    public DbSet<RigaCarrello> Carrello { get; set; }
+
     
 }

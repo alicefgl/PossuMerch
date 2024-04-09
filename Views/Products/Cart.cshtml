@@ -1,0 +1,57 @@
+@model IEnumerable<PossuMerch.Data.RigaCarrello>
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h1>Cart</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Item price
+            </th>
+            <th>
+                Total price
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            if (item.Quantita != 0)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item._NomeP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantita)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prezzo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Totale)
+                </td>
+                <td>
+                    <a asp-controller="Carrello" asp-action="Delete" asp-route-id="@item.IdRigaCarrello">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

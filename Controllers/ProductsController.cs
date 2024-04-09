@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PossuMerch.Data;
@@ -12,17 +13,20 @@ namespace PossuMerch.Controllers
 {
     public class ProductsController : Controller
     {
+        static List<Prodotto> Carrello { get; set; } = new();
         private readonly dbContext _context;
+        private readonly SignInManager<Utente> _signInManager;
 
-        public ProductsController(dbContext context)
+        public ProductsController(dbContext context, SignInManager<Utente> signInManager)
         {
+            _signInManager = signInManager;
             _context = context;
         }
 
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Prodotti.ToListAsync());
+            return View(Carrello);
         }
 
         // GET: Products/Details/5
@@ -161,41 +165,25 @@ namespace PossuMerch.Controllers
         {
             return View(await _context.Prodotti.ToListAsync());
         }
-        public async Task<IActionResult> Purchase_All()
+        
+        public async Task<IActionResult> Cart()
         {
-            return View(await _context.Prodotti.ToListAsync());
+            var c1 = from c in _context.Carrello
+                     where c.UserName == _signInManager.UserManager.GetUserName(User)
+                     select c;
+
+            return View(await c1.ToListAsync());
         }
+
         [HttpPost]
-
-        // public async Task<IActionResult> Cart(string _NomeP, int Quantita)
-
-        public async Task<IActionResult> Cart([Bind("_NomeP,Quantita,TipoP,Prezzo")] Prodotto p)
+        public async Task<IActionResult> Cart([Bind("_NomeP, TipoP, Prezzo, UserName, Quantita")] RigaCarrello r)
         {
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(p);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProdottoExists(p._NomeP))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                await _context.Carrello.AddAsync(r);
+                await _context.SaveChangesAsync();
             }
-
-            return View(await _context.Prodotti.ToListAsync());
-
-
+            return View(await _context.Carrello.ToListAsync());
         }
     }
 }

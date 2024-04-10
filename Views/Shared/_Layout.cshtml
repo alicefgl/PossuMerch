@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using PossuMerch.Data
+@inject SignInManager<Utente> SignInManager
+@inject UserManager<Utente> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -8,21 +13,47 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PossuMerch.styles.css" asp-append-version="true" />
 </head>
+<script>
+    function showGif() {
+        var gifContainer = document.getElementById("gifContainer");
+        gifContainer.style.display = "block";
+        
+        setTimeout(function() {
+            hideGif();
+        }, 8600);
+    }
 
+    function hideGif() {
+        var gifContainer = document.getElementById("gifContainer");
+        gifContainer.style.display = "none"; // Nascondi il contenitore della GIF
+    }
+</script>
+
+<style>
+    #gifContainer {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px); /* Posizionamento sotto il logo */
+        left: 50%; /* Centratura orizzontale */
+        transform: translateX(-50%); /* Centratura orizzontale */
+        z-index: 999; /* Assicura che sia sopra ogni altro contenuto */
+    }
+</style>
 <body style="margin-top: 150px;">
     <header>
         <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
             <div class="container-fluid">
+                <!-- Logo -->
+                <div class="nav-item" >
+                    <a class="navbar-brand" onclick="showGif()">
+                        <img src="/img/white_logo.png" alt="Logo" style="width: 150px; height: auto;">
+                    </a>
+                </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item" style="height: 100%; width: 100%; margin-left: 20px; display: flex; align-items: center;">
-                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                                <img src="/img/white_logo.png" alt="Logo" style="width: 150px; height: auto;">
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -41,6 +72,9 @@
                             <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="LegalNotices">Legal Notices</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">@ViewData["Nome"]</a>
                         </li>
                     </ul>
@@ -49,7 +83,9 @@
             </div>
         </nav>
     </header>
-
+    <div id="gifContainer" style="display: none; position: absolute; top: 20px; left: 120px; z-index: 999;">
+        <img src="/img/opo_appeso.GIF" alt="GIF" style="height: 400px; width: 400px;">
+    </div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

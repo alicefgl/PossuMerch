@@ -123,67 +123,84 @@
         <hr>
         <div class="container">
             <h2 class="text-center">BEST-SELLERS:</h2>
-            <br><h3 class="text-center">guitars</h3><br>
+            <br>
+            <h3 class="text-center">guitars</h3>
+            <br>
             <div class="row mt-4">
                 <div class="col-md-4">
+                    <a asp-controller="Products" asp-action="Purchase_Chitarre">
+                        <div class="card">
+                            <img src="img/guitars/img1.png" class="card-img-top" alt="img1">
+                            <div class="card-body text-center">
+                                <p class="card-text">FENDER AM Ultra Stratocaster MN Cobra Blue</p>
+                                <p><small>2399.0€</small></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a asp-controller="Products" asp-action="Purchase_Chitarre">
+                        <div class="card">
+                            <img src="img/guitars/img2.png" class="card-img-top" alt="img2">
+                            <div class="card-body text-center">
+                                <p class="card-text">EPIPHONE Billie Joe Armstrong Les Paul Junior Classic White</p>
+                                <p><small>535.0€</small></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a asp-controller="Products" asp-action="Purchase_Chitarre">
+                        <div class="card">
+                            <img src="img/guitars/img3.png" class="card-img-top" alt="img3">
+                            <div class="card-body text-center">
+                                <p class="card-text">TAYLOR 214ce Koa</p>
+                                <p><small>1149.0€</small></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <br>
+        <h3 class="text-center">basses</h3>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <a asp-controller="Products" asp-action="Purchase_Bassi">
                     <div class="card">
-                        <img src="img/guitars/img1.png" class="card-img-top" alt="img1">
+                        <img src="img/basses/img1.png" class="card-img-top" alt="img1">
                         <div class="card-body text-center">
-                            <p class="card-text">FENDER AM Ultra Stratocaster MN Cobra Blue</p>
+                            <p class="card-text">Fender AM Ultra Jazz RW Ultraburst</p>
                             <p><small>2399.0€</small></p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a asp-controller="Products" asp-action="Purchase_Bassi">
                     <div class="card">
-                        <img src="img/guitars/img2.png" class="card-img-top" alt="img2">
+                        <img src="img/basses/img2.png" class="card-img-top" alt="img2">
                         <div class="card-body text-center">
-                            <p class="card-text">EPIPHONE Billie Joe Armstrong Les Paul Junior Classic White</p>
-                            <p><small>535.0€</small></p>
+                            <p class="card-text">Ibanez SR305E Cerulean Aura Burst</p>
+                            <p><small>409.0€</small></p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a asp-controller="Products" asp-action="Purchase_Bassi">
                     <div class="card">
-                        <img src="img/guitars/img3.png" class="card-img-top" alt="img3">
+                        <img src="img/basses/img3.png" class="card-img-top" alt="img3">
                         <div class="card-body text-center">
-                            <p class="card-text">TAYLOR 214ce Koa</p>
-                            <p><small>1149.0€</small></p>
+                            <p class="card-text">Yamaha TRBX604FM Black</p>
+                            <p><small>769.0€</small></p>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
-        <br><h3 class="text-center">basses</h3><br>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="img/basses/img1.png" class="card-img-top" alt="img1">
-                    <div class="card-body text-center">
-                        <p class="card-text">Fender AM Ultra Jazz RW Ultraburst</p>
-                        <p><small>2399.0€</small></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="img/basses/img2.png" class="card-img-top" alt="img2">
-                    <div class="card-body text-center">
-                        <p class="card-text">Ibanez SR305E Cerulean Aura Burst</p>
-                        <p><small>409.0€</small></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="img/basses/img3.png" class="card-img-top" alt="img3">
-                    <div class="card-body text-center">
-                        <p class="card-text">Yamaha TRBX604FM Black</p>
-                        <p><small>769.0€</small></p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </main>
 </body>
 </html>

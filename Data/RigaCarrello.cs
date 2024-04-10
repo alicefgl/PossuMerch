@@ -8,7 +8,6 @@ public class RigaCarrello
     public string? _NomeP { get; set; }
     public string? TipoP { get; set; }
     public float? Prezzo { get; set; }
-    
     public string? UserName { get; set; }
     public int? Quantita { get; set; }
     public float? Totale { get{ return Prezzo * Quantita; }}

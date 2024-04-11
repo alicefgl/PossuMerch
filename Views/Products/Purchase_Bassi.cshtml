@@ -124,7 +124,6 @@
                                         <div style="display: flex; align-items: center;">
                                             <input asp-for="@item.Quantita" name="Quantita" class="form-control">
                                             <button type="submit" class="btn btn-primary">Add to Cart</button> <!-- Pulsante aggiungi al carrello -->
-                                            <button type="button" class="btn btn-danger" onclick="removeFromCart(this)">Remove All</button> <!-- Pulsante rimuovi dal carrello -->
                                         </div>
                                         <input type="hidden" name="_NomeP" value="@item._NomeP" />
                                         <input type="hidden" name="Prezzo" value="@item.Prezzo" />
@@ -175,7 +174,6 @@
                                         <div style="display: flex; align-items: center;">
                                             <input asp-for="@item.Quantita" name="Quantita" class="form-control">
                                             <button type="submit" class="btn btn-primary">Add to Cart</button>
-                                            <button type="button" class="btn btn-danger" onclick="removeFromCart(this)">Remove All</button>                                        
                                         </div>
                                         <input type="hidden" name="_NomeP" value="@item._NomeP" />
                                         <input type="hidden" name="Prezzo" value="@item.Prezzo" />
